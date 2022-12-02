@@ -50,6 +50,7 @@ type Client struct {
 	monitor            *monitoring.Monitor
 	serverCapabilities *models.Capabilities
 	consoleDecoder     *encoding.Decoder
+	consoleEncoder     *encoding.Encoder
 	filesAPI           files.FileAPI
 	watchdog           *Watchdog
 }
@@ -101,6 +102,7 @@ func NewClient(config *ClientConfigHolder, filesAPI files.FileAPI) (*Client, err
 	if enc != nil {
 		logger.Infof("Console encoding detected as: %s", enc)
 		client.consoleDecoder = enc.NewDecoder()
+		client.consoleEncoder = enc.NewEncoder()
 	}
 
 	return client, nil
